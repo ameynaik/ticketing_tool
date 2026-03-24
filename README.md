@@ -12,7 +12,7 @@
 
 ## High Level Design
 
-> _Diagram placeholder — add architecture diagram to `documentation/assets/` and embed here._
+![Architecture Diagram](documentation/assets/arch-diagram.png)
 
 ### Architecture Pattern: CQRS (Command Query Responsibility Segregation)
 
@@ -97,4 +97,17 @@ Ticket_Tool ──publish──► [ lock-release-events ] ──consume──�
 | Transactional Store | Spring Data JPA + H2 |
 | Messaging | Apache Kafka (spring-kafka) |
 | Build | Maven |
+
+---
+
+## Transactional Scenarios & Design Decisions
+
+| # | Scenario | Risk | Design Decision | Guarantee |
+|---|---|---|---|---|
+| 1 | Two users lock same seat | Double-booking | `@Transactional` with fail-fast status check | Strong (single DB) |
+| 2 | User abandons after locking | Seats blocked forever | 5-min TTL, lazy release on read, Kafka sync to write | Eventual |
+| 3 | User confirms after lock expires | Pay for released seats | Re-check expiry at confirmation time | Strong (single DB) |
+| 4 | Some seats in batch unavailable | Partial lock | All-or-nothing rollback | Strong (single DB) |
+| 5 | Read DB out of sync with write DB | Stale availability | Eventual consistency via Kafka events | Eventual |
+| 6 | Kafka unavailable | Sync lost | Write DB = source of truth, idempotent operations | Eventual + manual |
 
