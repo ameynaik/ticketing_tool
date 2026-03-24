@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.publicis.sapient.Ticket_Tool.EventType;
+import com.publicis.sapient.Ticket_Tool.pojo.TheatreDTO;
+import com.publicis.sapient.Ticket_Tool.pojo.TheatreEventDTO;
 import com.publicis.sapient.Ticket_Tool.reddis.entities.City;
-import com.publicis.sapient.Ticket_Tool.reddis.entities.Event;
-import com.publicis.sapient.Ticket_Tool.reddis.entities.Theatre;
-import com.publicis.sapient.Ticket_Tool.reddis.entities.TheatreEvent;
 import com.publicis.sapient.Ticket_Tool.services.DashboardService;
 
 @RestController
@@ -31,29 +30,29 @@ public class DashboardController {
     }
 
     @GetMapping("/cities/{cityId}/events")
-    public List<Event> getEventsByCity(@PathVariable Integer cityId) {
+    public List<TheatreEventDTO> getEventsByCity(@PathVariable Integer cityId) {
         return dashboardService.getEventsByCityId(cityId);
     }
 
     @GetMapping("/events/type/{type}/cities/{cityId}")
-    public List<Event> getEventsByTypeAndCity(@PathVariable EventType type, @PathVariable Integer cityId) {
+    public List<TheatreEventDTO> getEventsByTypeAndCity(@PathVariable EventType type, @PathVariable Integer cityId) {
         return dashboardService.getEventsByTypeAndCity(type, cityId);
     }
 
     @GetMapping("/cities/{cityId}/theatres")
-    public List<Theatre> getTheatresByCity(@PathVariable Integer cityId) {
+    public List<TheatreDTO> getTheatresByCity(@PathVariable Integer cityId) {
         return dashboardService.getTheatresByCityId(cityId);
     }
 
     @GetMapping("/cities/{cityId}/events/{eventName}/theatres")
-    public List<Theatre> getTheatresByEventAndCity(
+    public List<TheatreDTO> getTheatresByEventAndCity(
             @PathVariable Integer cityId,
             @PathVariable String eventName) {
         return dashboardService.getTheatresByEventAndCity(eventName, cityId);
     }
 
     @GetMapping("/theatres/{theatreId}/events")
-    public List<TheatreEvent> getTheatreEventsByDateAndId(
+    public List<TheatreEventDTO> getTheatreEventsByDateAndId(
             @PathVariable Integer theatreId,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return dashboardService.getTheatreEventsByDateAndId(date, theatreId);

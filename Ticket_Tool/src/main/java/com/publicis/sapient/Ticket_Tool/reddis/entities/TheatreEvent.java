@@ -7,6 +7,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
 @RedisHash("TheatreEvent")
-public record TheatreEvent(@Id Integer theatreId, String eventName, LocalTime eventTime, @Indexed LocalDate eventDate) {
+public record TheatreEvent(@Id Integer id, @Indexed Integer eventId, LocalTime eventTime, @Indexed LocalDate eventDate, @Indexed Integer theatreId) {
     
 }

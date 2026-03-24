@@ -12,4 +12,6 @@ import com.publicis.sapient.Ticket_Tool.reddis.entities.TheatreEvent;
 public interface TheatreEventRepository extends CrudRepository<TheatreEvent, Integer> {
 
     List<TheatreEvent> findByEventDateAndTheatreId(LocalDate eventDate, Integer theatreId);
+    List<TheatreEvent> findByTheatreId(Integer theatreId);
+    List<TheatreEvent> findByEventId(Integer eventId);
 }

@@ -9,7 +9,7 @@ import com.publicis.sapient.Ticket_Tool.EventType;
 import com.publicis.sapient.Ticket_Tool.reddis.entities.Event;
 
 @Repository
-public interface EventsRepository extends CrudRepository<Event, String> {
+public interface EventsRepository extends CrudRepository<Event, Integer> {
 
     List<Event> findByTypeAndCityId(EventType type, Integer cityId);
 

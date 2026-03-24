@@ -14,6 +14,10 @@
 
 ![Architecture Diagram](documentation/assets/arch-diagram.png)
 
+### ER Diagram
+
+![ER Diagram](documentation/assets/ER_Diagram.png)
+
 ### Architecture Pattern: CQRS (Command Query Responsibility Segregation)
 
 The system is split into two independent microservices that separate **read** and **write** responsibilities. Communication between them is **event-driven** using **Apache Kafka**, making the architecture resilient to temporary service outages.
