@@ -1,5 +1,5 @@
 # Ticket_Tool
-### This project is done as part of Assignment round of Publicis Sapient.
+### This project is done as part of Assignment round of Company.
 
 ## Introduction
  Demo Project for online Ticket selling platform.
